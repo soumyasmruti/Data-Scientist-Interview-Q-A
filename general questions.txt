@@ -1,0 +1,108 @@
+Which machine learning model (classification vs. regression, for example) to use given a particular problem.
+
+Solution:- 
+1. Discovering Structure in Data - Clustering
+2. Predicting Categories :- Classification (Logistic Regression, Neural Networks, Random Forest, Boosting, SVM)
+3. Predicting Values :- Regression (linear, Polynomial, Random Forest Regressor, Boosting regressor)
+4. Finding unusual data points - Anomaly Detection (SVM, PCA)
+
+What are some of the commong algorithms and when to use them?
+
+Answer:- 
+Decision trees - A discriminative classifier. The tree finds one data feature and a threshold at the
+current node that best divides the data into separate classes. The data is split and we
+recursively repeat the procedure down the left and right branches of the tree. Though
+not often the top performer, it’s often the first thing you should try because it is fast
+and has high functionality
+
+Boosting - A discriminative group of classifiers. The overall classification decision is made from
+the combined weighted classification decisions of the group of classifiers. In training,
+we learn the group of classifiers one at a time. Each classifi er in the group is a “weak”
+classifier (only just above chance performance). These weak classifiers are typically
+composed of single-variable decision trees called “stumps”. In training, the decision
+stump learns its classification decisions from the data and also learns a weight for its
+“vote” from its accuracy on the data. Between training each classifier one by one, the
+data points are re-weighted so that more attention is paid to data points where errors
+were made. This process continues until the total error over the data set, arising from
+the combined weighted vote of the decision trees, falls below a set threshold. This algorithm
+is often effective when a large amount of training data is available
+
+Random trees - A discriminative forest of many decision trees, each built down to a large or maximal
+splitting depth. During learning, each node of each tree is allowed to choose splitting
+variables only from a random subset of the data features. This helps ensure that each
+tree becomes a statistically independent decision maker. In run mode, each tree
+gets an unweighted vote. This algorithm is often very eff ective and can also perform
+regression by averaging the output numbers from each tree
+
+K-nearest neighbors - The simplest possible discriminative classifi er. Training data are simply stored with
+labels. Thereafter, a test data point is classifi ed according to the majority vote of its
+K nearest other data points (in a Euclidean sense of nearness). This is probably the simplest
+thing you can do. It is often eff ective but it is slow and requires lots of memory 
+
+Neural networks - A discriminative algorithm that (almost always) has “hidden units” between output
+and input nodes to better represent the input signal. It can be slow to train but is
+very fast to run. Still the top performer for things like letter recognition 
+
+SVM -  A discriminative classifi er that can also do regression. A distance function between
+any two data points in a higher-dimensional space is defi ned. (Projecting data into
+higher dimensions makes the data more likely to be linearly separable.) The algorithm
+learns separating hyperplanes that maximally separate the classes in the higher
+dimension. It tends to be among the best with limited data, losing out to boosting or
+random trees only when large data sets are available
+
+K-means - An unsupervised clustering algorithm that represents a distribution of data using K
+centers, where K is chosen by the user. The diff erence between this algorithm and
+expectation maximization is that here the centers are not Gaussian and the resulting
+clusters look more like soap bubbles, since centers (in eff ect) compete to “own” the
+closest data points. These cluster regions are often used as sparse histogram bins to
+represent the data. 
+
+Naive-bayes - A generative classifier in which features are assumed to be Gaussian distributed and
+statistically independent from each other, a strong assumption that is generally not
+true. For this reason, it’s often called a “naïve Bayes” classifi er. However, this method
+often works surprisingly well. Original mention
+
+What is Overfitting? (Explained in regression setting.)
+
+An overfit model is one that is too complicated for your data set. When this happens, the regression model becomes 
+tailored to fit the quirks and random noise in your specific sample rather than reflecting the overall population.
+
+Overfitting a regression model occurs when you attempt to estimate too many parameters from a sample that is too small.
+Larger sample sizes allow you to specify more complex models.
+Simulation studies show that a good rule of thumb is to have 10-15 observations per term in multiple linear regression,
+if your model contains two predictors and the interaction term, you’ll need 30-45 observations.
+
+Cross-validation can detect overfit models by determining how well your model generalizes to other data sets by 
+partitioning your data. This process helps you assess how well the model fits new observations that weren't
+used in the model estimation process.
+
+To avoid overfitting your model in the first place, collect a sample that is large enough so you can safely 
+include all of the predictors, interaction effects, and polynomial terms that your response variable requires.
+
+Regularization is a technique used in an attempt to solve the overfitting [1] problem in statistical models.
+
+You penalize your loss function by adding a multiple of an L1 (LASSO [2]) or an L2 (Ridge [3]) norm of your
+weights vector w (it is the vector of the learned parameters in your linear regression).
+You get the following equation:
+
+L(X,Y)+λN(w)
+
+(NN is either the L1L1, L2L2 or any other norm)
+
+This will help you avoid overfiting and will perform, at the same time, features selection for certain 
+regularization norms (the L1L1 in the LASSO does the job).
+
+Finally you might ask: OK I have everything now. How can I tune in the regularization term λλ?
+
+One possible answer is to use cross-validation: you divide your training data, you train your
+model for a fixed value of λλ and test it on the remaining subsets and repeat this procedure while
+varying λ. Then you select the best λλ that minimizes your loss function.
+
+A learning algorithm with low bias and high variance may be suitable under what circumstances?
+
+If your training set is small, high bias/low variance classifiers (e.g., Naive Bayes) have an advantage 
+over low bias/high variance classifiers (e.g., kNN), since the latter will overfit. But low bias/high variance
+classifiers start to win out as your training set grows (they have lower asymptotic error), 
+since high bias classifiers aren’t powerful enough to provide accurate models.
+
+http://scott.fortmann-roe.com/docs/BiasVariance.html
